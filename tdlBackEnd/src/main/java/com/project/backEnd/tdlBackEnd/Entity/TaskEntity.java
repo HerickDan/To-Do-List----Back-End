@@ -1,17 +1,24 @@
 package com.project.backEnd.tdlBackEnd.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.util.UUID;
 
-@Table(name = "tasks")
 @Entity
+@Table(name = "task")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TaskEntity {
-    @Id
-    private String id = UUID.randomUUID().toString();
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private String title;
+
     private boolean completed;
 }
