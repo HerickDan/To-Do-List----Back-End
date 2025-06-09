@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class NewController {
-
     private final TaskService taskService;
-
     public NewController(TaskService taskService) {
         this.taskService = taskService;
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/createTask")
     public TaskEntity createTask(@RequestBody TaskEntity task) {
         System.out.println("Título recebido: ");
