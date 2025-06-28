@@ -1,8 +1,11 @@
 package com.project.backEnd.tdlBackEnd.controllers;
 
 import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
+import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import com.project.backEnd.tdlBackEnd.api.services.TaskService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -12,9 +15,18 @@ public class NewController {
         this.taskService = taskService;
     }
     @CrossOrigin(origins = "*")
+
     @PostMapping("/createTask")
-    public TaskEntity createTask(@RequestBody TaskEntity task) {
+    public TaskDto createTask(
+            @RequestBody TaskDto task) {
         System.out.println("Título recebido: ");
-        return taskService.createTask(task);
+        return  taskService.createTask(task);
+    }
+
+    @GetMapping("/getTaskById/{id}")
+    public TaskDto getTaskById(
+            @PathVariable UUID id
+    ){
+        return taskService.getTaskById(id);
     }
 }

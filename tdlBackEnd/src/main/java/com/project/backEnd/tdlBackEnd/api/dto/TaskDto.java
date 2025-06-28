@@ -1,16 +1,13 @@
 package com.project.backEnd.tdlBackEnd.api.dto;
 
-import java.util.UUID;
+import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
+import lombok.Builder;
+import lombok.Data;
 
-
+@Data
+@Builder
 public class TaskDto {
-    private String id = UUID.randomUUID().toString();
-    private String title;
-    private boolean completed;
-
-    public void toDto(String id, String title, boolean completed){
-
-        this.title = title;
-        this.completed = completed;
-    }
+    public String title;
+    public String priority;
+    public boolean completed;
 }

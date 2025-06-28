@@ -1,18 +1,36 @@
 package com.project.backEnd.tdlBackEnd.api.services;
 
 import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
+import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import com.project.backEnd.tdlBackEnd.api.repositories.ITaskRepository;
+import lombok.Builder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
+@Builder
 @Service
 public class TaskService {
+
     private final ITaskRepository taskRepository;
 
     public TaskService(ITaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
-    public TaskEntity createTask(TaskEntity task){
-        return taskRepository.save(task);
+    public TaskDto createTask(TaskDto taskDto) {
+        TaskEntity entity = TaskEntity.builder()
+                .title(taskDto.title)
+                .completed(taskDto.completed)
+                .build();
+        TaskEntity saved = taskRepository.save(entity);
+        TaskDto taskDto1 = TaskDto.builder()
+                .title(saved.title).completed(saved.completed).build();
+        return taskDto1;
+    }
+
+    public TaskDto getTaskById(UUID id) {
+        TaskEntity getedTask = taskRepository.getTaskById(id);
+        return TaskDto.builder().title(getedTask.title).completed(getedTask.completed).build();
     }
 }

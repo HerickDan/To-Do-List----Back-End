@@ -1,24 +1,27 @@
 package com.project.backEnd.tdlBackEnd.Entity;
 
+import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "task")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class TaskEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
-    private String title;
+    public String title;
 
-    private boolean completed;
+    public boolean completed;
+
+
 }
