@@ -29,8 +29,16 @@ public class TaskService {
         return taskDto1;
     }
 
-    public TaskDto getTaskById(UUID id) {
-        TaskEntity getedTask = taskRepository.getTaskById(id);
-        return TaskDto.builder().title(getedTask.title).completed(getedTask.completed).build();
+    public TaskEntity getTaskByTitle(String title) {
+        TaskEntity getedTask = taskRepository.getTaskByTitle(title);
+        return TaskEntity.builder()
+                .title(getedTask.title)
+                .completed(getedTask.completed)
+                .build();
+    }
+
+    public void deleteTask(String title){
+        TaskEntity getedTask = taskRepository.getTaskByTitle(title);
+        taskRepository.deleteById(getedTask.id);
     }
 }
