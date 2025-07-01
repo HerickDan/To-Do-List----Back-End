@@ -6,6 +6,7 @@ import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import com.project.backEnd.tdlBackEnd.api.services.TaskService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -38,5 +39,12 @@ public class NewController {
             @PathVariable String title
     ){
         taskService.deleteTask(title);
+    }
+
+    @GetMapping("/getAll")
+    public List<TaskEntity> getAllTasks(
+
+    ){
+        return taskService.getAllTasks();
     }
 }

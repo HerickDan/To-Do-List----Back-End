@@ -5,8 +5,7 @@ import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import com.project.backEnd.tdlBackEnd.api.repositories.ITaskRepository;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
+import java.util.List;
 
 @Builder
 @Service
@@ -35,6 +34,11 @@ public class TaskService {
                 .title(getedTask.title)
                 .completed(getedTask.completed)
                 .build();
+    }
+
+    public List<TaskEntity> getAllTasks(){
+        List<TaskEntity> tasksList = taskRepository.findAll();
+        return tasksList;
     }
 
     public void deleteTask(String title){
