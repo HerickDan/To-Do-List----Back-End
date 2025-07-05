@@ -18,7 +18,7 @@ public class TaskEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     public String taskName;
 
     public boolean completed;
