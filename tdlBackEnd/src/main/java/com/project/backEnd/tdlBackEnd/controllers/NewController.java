@@ -21,9 +21,8 @@ public class NewController {
     @CrossOrigin(origins = "*")
 
     @PostMapping("/createTask")
-    public TaskDto createTask(
-            @RequestBody TaskDto task) {
-        System.out.println("Título recebido: ");
+    public TaskDto createTask (
+            @RequestBody TaskDto task) throws Exception {
         return taskService.createTask(task);
     }
 

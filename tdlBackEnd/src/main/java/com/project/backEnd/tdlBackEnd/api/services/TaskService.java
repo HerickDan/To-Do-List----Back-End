@@ -4,8 +4,10 @@ import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
 import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
 import com.project.backEnd.tdlBackEnd.api.repositories.ITaskRepository;
 import lombok.Builder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @Service
@@ -17,7 +19,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public TaskDto createTask(TaskDto taskDto) {
+    public TaskDto createTask(TaskDto taskDto) throws Exception {
         TaskEntity entity = TaskEntity.builder()
                 .taskName(taskDto.taskName)
                 .priority(taskDto.priority)
@@ -26,7 +28,11 @@ public class TaskService {
         TaskEntity saved = taskRepository.save(entity);
         TaskDto taskDto1 = TaskDto.builder()
                 .taskName(saved.taskName).completed(saved.completed).build();
-        return taskDto1;
+        try {
+            return taskDto1;
+        } catch (DataIntegrityViolationException e) {
+            throw new Exception("Task already exists", e);
+        }
     }
 
     public TaskEntity getTaskByTitle(String title) {
@@ -46,4 +52,10 @@ public class TaskService {
         TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
         taskRepository.deleteById(getedTask.id);
     }
+//
+//    public TaskEntity updateTask(String id){
+//        UUID idConverter = UUID.fromString(id);
+//        TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
+//        return TaskEntity;
+//    }
 }
