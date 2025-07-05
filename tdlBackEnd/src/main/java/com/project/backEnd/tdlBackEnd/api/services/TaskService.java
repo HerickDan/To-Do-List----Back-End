@@ -19,19 +19,20 @@ public class TaskService {
 
     public TaskDto createTask(TaskDto taskDto) {
         TaskEntity entity = TaskEntity.builder()
-                .title(taskDto.title)
+                .taskName(taskDto.taskName)
+                .priority(taskDto.priority)
                 .completed(taskDto.completed)
                 .build();
         TaskEntity saved = taskRepository.save(entity);
         TaskDto taskDto1 = TaskDto.builder()
-                .title(saved.title).completed(saved.completed).build();
+                .taskName(saved.taskName).completed(saved.completed).build();
         return taskDto1;
     }
 
     public TaskEntity getTaskByTitle(String title) {
-        TaskEntity getedTask = taskRepository.getTaskByTitle(title);
+        TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
         return TaskEntity.builder()
-                .title(getedTask.title)
+                .taskName(getedTask.taskName)
                 .completed(getedTask.completed)
                 .build();
     }
@@ -42,7 +43,7 @@ public class TaskService {
     }
 
     public void deleteTask(String title){
-        TaskEntity getedTask = taskRepository.getTaskByTitle(title);
+        TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
         taskRepository.deleteById(getedTask.id);
     }
 }

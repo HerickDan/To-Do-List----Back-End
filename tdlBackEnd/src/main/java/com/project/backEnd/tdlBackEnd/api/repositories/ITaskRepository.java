@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 @EnableJpaRepositories
 public interface ITaskRepository extends JpaRepository<TaskEntity, UUID> {
-    TaskEntity getTaskByTitle(String title);
+    TaskEntity getTaskByTaskName(String title);
     void deleteById(UUID id);
     List<TaskEntity> findAll();
 }

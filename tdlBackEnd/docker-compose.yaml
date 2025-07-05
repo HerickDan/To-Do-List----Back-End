@@ -1,7 +1,8 @@
 version: "3.9"
+
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:15
     restart: always
     container_name: postgres
     ports:
@@ -11,4 +12,12 @@ services:
       POSTGRES_PASSWORD: test
       POSTGRES_DB: toDoBase
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U herick"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

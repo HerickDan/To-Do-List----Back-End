@@ -19,9 +19,10 @@ public class TaskEntity {
     public UUID id;
 
     @Column(nullable = false)
-    public String title;
+    public String taskName;
 
     public boolean completed;
 
+    public String priority;
 
 }

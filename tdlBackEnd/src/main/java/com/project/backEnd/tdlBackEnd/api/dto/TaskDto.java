@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 @Builder
 public class TaskDto {
-    public String title;
-    public String priority;
+    public String taskName;
+    @Builder.Default
+    public String priority = "low";
     public boolean completed;
 }
