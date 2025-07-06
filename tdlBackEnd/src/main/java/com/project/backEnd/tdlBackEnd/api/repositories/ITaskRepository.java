@@ -12,4 +12,5 @@ public interface ITaskRepository extends JpaRepository<TaskEntity, UUID> {
     TaskEntity getTaskByTaskName(String title);
     void deleteById(UUID id);
     List<TaskEntity> findAll();
+    TaskEntity getTaskById(UUID id);
 }

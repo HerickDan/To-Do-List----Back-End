@@ -45,10 +45,11 @@ public class TaskService {
         TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
         taskRepository.deleteById(getedTask.id);
     }
-//
-//    public TaskEntity updateTask(String id){
-//        UUID idConverter = UUID.fromString(id);
-//        TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
-//        return TaskEntity;
-//    }
+
+    public TaskEntity completeTask(String id) {
+        UUID idConverter = UUID.fromString(id);
+        TaskEntity getedTask = taskRepository.getTaskById(idConverter);
+        TaskEntity updatedTask = taskRepository.save(getedTask.toBuilder().completed(true).build());
+        return updatedTask;
+    }
 }

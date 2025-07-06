@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "task")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @Setter
 public class TaskEntity {

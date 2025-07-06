@@ -47,4 +47,11 @@ public class NewController {
     ){
         return taskService.getAllTasks();
     }
+
+    @PatchMapping("/update/{id}")
+    public TaskEntity completeTask(
+        @PathVariable String id
+    ){
+        return taskService.completeTask(id);
+    }
 }
