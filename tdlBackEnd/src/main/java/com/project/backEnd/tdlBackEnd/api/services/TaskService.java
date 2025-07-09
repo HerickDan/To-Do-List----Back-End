@@ -24,8 +24,10 @@ public class TaskService {
                 .priority(taskDto.priority)
                 .completed(taskDto.completed)
                 .build();
-        TaskEntity saved = taskRepository.save(entity);
-        return saved;
+
+        TaskEntity savedTask = taskRepository.save(entity);
+
+        return savedTask;
     }
 
     public TaskEntity getTaskByTitle(String title) {
@@ -43,13 +45,17 @@ public class TaskService {
 
     public void deleteTask(String title){
         TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
+
         taskRepository.deleteById(getedTask.id);
     }
 
     public TaskEntity completeTask(String id) {
         UUID idConverter = UUID.fromString(id);
+
         TaskEntity getedTask = taskRepository.getTaskById(idConverter);
+
         TaskEntity updatedTask = taskRepository.save(getedTask.toBuilder().completed(true).build());
+
         return updatedTask;
     }
 }
