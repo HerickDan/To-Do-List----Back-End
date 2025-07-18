@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.List;
 import java.util.UUID;
-@EnableJpaRepositories
 public interface ITaskRepository extends JpaRepository<TaskEntity, UUID> {
     TaskEntity getTaskByTaskName(String title);
     void deleteById(UUID id);
+    void deleteAll();
     List<TaskEntity> findAll();
     TaskEntity getTaskById(UUID id);
 }

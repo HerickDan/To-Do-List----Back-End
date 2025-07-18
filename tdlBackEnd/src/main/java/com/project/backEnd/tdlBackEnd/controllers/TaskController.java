@@ -9,14 +9,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
+
 public class TaskController {
     private final TaskService taskService;
 
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-
-    @CrossOrigin(origins = "*")
 
     @PostMapping("/createTask")
     public TaskEntity createTask (@RequestBody TaskDto task) throws Exception {return taskService.createTask(task);}
@@ -39,5 +39,10 @@ public class TaskController {
         @PathVariable String id
     ){
         return taskService.completeTask(id);
+    }
+
+    @DeleteMapping("/deleteAllTasks")
+    public void deleteAllTasks(){
+        taskService.deleteAllTasks();
     }
 }

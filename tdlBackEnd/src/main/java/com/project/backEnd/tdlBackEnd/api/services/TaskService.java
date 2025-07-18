@@ -58,4 +58,9 @@ public class TaskService {
 
         return updatedTask;
     }
+
+    public void deleteAllTasks(){
+        taskRepository.deleteAll();
+    }
+
 }
