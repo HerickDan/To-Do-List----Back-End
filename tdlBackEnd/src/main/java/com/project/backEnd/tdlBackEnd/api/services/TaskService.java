@@ -2,11 +2,16 @@ package com.project.backEnd.tdlBackEnd.api.services;
 
 import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
 import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
+import com.project.backEnd.tdlBackEnd.api.dto.TaskResponseDto;
 import com.project.backEnd.tdlBackEnd.api.repositories.ITaskRepository;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Builder
 @Service
@@ -38,12 +43,20 @@ public class TaskService {
                 .build();
     }
 
-    public List<TaskEntity> getAllTasks(){
+    public List<TaskResponseDto> getAllTasks() {
         List<TaskEntity> tasksList = taskRepository.findAll();
-        return tasksList;
+        List<TaskResponseDto> convetToDto = tasksList.stream().map(it ->
+                TaskResponseDto.builder()
+                        .id(it.id)
+                        .taskName(it.taskName)
+                        .completed(it.completed)
+                        .priority(it.priority)
+                        .build()).collect(Collectors.toList());
+
+        return convetToDto;
     }
 
-    public void deleteTask(String title){
+    public void deleteTask(String title) {
         TaskEntity getedTask = taskRepository.getTaskByTaskName(title);
 
         taskRepository.deleteById(getedTask.id);
@@ -59,7 +72,7 @@ public class TaskService {
         return updatedTask;
     }
 
-    public void deleteAllTasks(){
+    public void deleteAllTasks() {
         taskRepository.deleteAll();
     }
 

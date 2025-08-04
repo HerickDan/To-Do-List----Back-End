@@ -2,6 +2,7 @@ package com.project.backEnd.tdlBackEnd.controllers;
 
 import com.project.backEnd.tdlBackEnd.Entity.TaskEntity;
 import com.project.backEnd.tdlBackEnd.api.dto.TaskDto;
+import com.project.backEnd.tdlBackEnd.api.dto.TaskResponseDto;
 import com.project.backEnd.tdlBackEnd.api.services.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("/createTask")
+    @PostMapping("/task")
     public TaskEntity createTask (@RequestBody TaskDto task) throws Exception {return taskService.createTask(task);}
 
     @GetMapping("/{title}")
-    public TaskEntity getTaskByTitle(@PathVariable String title){
+    public TaskEntity getTaskByName(@PathVariable String title){
         return taskService.getTaskByTitle(title);
     }
 
@@ -32,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping("/getAll")
-    public List<TaskEntity> getAllTasks(){return taskService.getAllTasks();}
+    public List<TaskResponseDto> getAllTasks(){return taskService.getAllTasks();}
 
     @PatchMapping("/update/{id}")
     public TaskEntity completeTask(
